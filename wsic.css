@@ -1,19 +1,61 @@
-#id{
-    display: inline;
-    position: relative;
+#id {
+  display: inline;
+  position: relative;
 }
 
-.navbar-custom{
-    background-image: linear-gradient(to bottom right, rgb(25, 25, 196), rgb(107, 29, 107));
+.company{
+  color: white;
+  font-family: Nunito;
+  font-weight: 500;
+  font-size: 25px;
 }
 
-.navbar-custom .nav-text-custom{
-    color: white;
+.navbar-custom {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
 }
 
-header img{
-    height: 95vh;
-    width: 100%;
-    opacity: .7;
-    clip-path: ();
+.navbar-custom .nav-text-custom {
+  color: white;
+}
+
+header {
+  position: relative;
+  background-position: top;
+  background-image: url(headerbackground.jpeg);
+  background-size: cover;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+  color: blue;
+  opacity: 0.9;
+  height: 95vh;
+  width: 100%;
+}
+
+.header-div{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border: 3px solid black;
+  color: white;
+  text-transform: uppercase;
+  background-image: linear-gradient(to bottom right,
+    rgba(3, 3, 139, 0.85),
+    rgba(59, 2, 59, 0.85));
+}
+
+.header-company-name{
+  display: block;
+  font-size: 60px;
+  font-family: Nunito;
+  font-weight: 700;
+}
+
+.header-company-sub{
+  display: block;
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 4.2px;
 }

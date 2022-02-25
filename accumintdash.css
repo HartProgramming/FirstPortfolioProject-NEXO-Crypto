@@ -1,0 +1,12 @@
+.navbar-custom {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
+  color: white;
+}
+
+.navbar-custom .nav-text-custom {
+  color: white;
+}

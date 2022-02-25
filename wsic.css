@@ -1,9 +1,16 @@
+body {
+  margin: 0;
+  font-family: Nunito;
+  font-weight: 400;
+  background-color: rgb(240, 238, 238);
+}
+
 #id {
   display: inline;
   position: relative;
 }
 
-.company{
+.company {
   color: white;
   font-family: Nunito;
   font-weight: 500;
@@ -34,28 +41,147 @@ header {
   width: 100%;
 }
 
-.header-div{
+.header-div {
   height: 100%;
   width: 100%;
   margin: 0;
   border: 3px solid black;
   color: white;
   text-transform: uppercase;
-  background-image: linear-gradient(to bottom right,
+  background-image: linear-gradient(
+    to bottom right,
     rgba(3, 3, 139, 0.85),
-    rgba(59, 2, 59, 0.85));
+    rgba(59, 2, 59, 0.85)
+  );
 }
 
-.header-company-name{
+.header-company-name {
   display: block;
   font-size: 60px;
   font-family: Nunito;
   font-weight: 700;
 }
 
-.header-company-sub{
+.header-company-sub {
   display: block;
   font-size: 30px;
   font-weight: 300;
   letter-spacing: 4.2px;
+}
+
+#purpose {
+  background-color: rgb(240, 238, 238);
+  height: 100vh;
+  width: 90%;
+  left: 50%;
+  margin-left: 5%;
+}
+
+.purpose-head {
+  font-size: 70px;
+  font-weight: 700;
+  margin-top: 90px;
+  letter-spacing: 3px;
+}
+
+.dashboard-div {
+  display: inline-block;
+  height: 450px;
+  width: 40%;
+  margin-left: 30px;
+  position: relative;
+  margin-top: 80px;
+}
+
+.dashboard {
+  font-size: 45px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.dashboard-text {
+  margin-top: 40px;
+  display: block;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.reccommend-div {
+  display: inline;
+  height: 450px;
+  width: 40%;
+  margin-left: 30px;
+  position: relative;
+  margin-top: 80px;
+}
+
+.reccommend {
+  font-size: 45px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.reccommend-text {
+  margin-top: 40px;
+  display: block;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+#accumint {
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(3, 3, 139, 0.85),
+    rgba(59, 2, 59, 0.85)
+  );
+  color: white;
+  height: 100vh;
+  width: 100%;
+  margin-top: 350px;
+}
+
+.accumint-head{
+  font-size: 70px;
+  font-weight: 700;
+  margin-top: 80px;
+  text-transform: uppercase;
+}
+
+
+#wheelLogo{
+  height: 400px;
+  animation: rotationWheel 6s infinite linear;
+  backface-visibility: hidden;
+}
+
+#circleLogo{
+  height: 400px;
+  position:absolute;
+  backface-visibility: hidden;
+}
+
+@keyframes rotationWheel{
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes rotationCircle{
+  0%{
+    transform: rotate3d(1, 1, 1, 0deg);
+  }
+
+  50%{
+    transform: rotate3d(1, 1, 1, 180deg);
+  }
+  100%{
+    transform: rotate3d(1, 1, 1, 359deg);
+  }
+}
+
+.accumint-para{
+  font-size: 30px;
 }

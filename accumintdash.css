@@ -1,3 +1,8 @@
+body{
+    margin: 0;
+    font-family: Nunito;
+}
+
 .navbar-custom {
   background-image: linear-gradient(
     to bottom right,
@@ -7,6 +12,49 @@
   color: white;
 }
 
-.navbar-custom .nav-text-custom {
+.navbar-dark .navbar-custom {
   color: white;
+}
+
+.header{
+    margin-top: 70px;
+}
+
+.header h1{
+    font-size: 4em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.select-coins{
+    margin-top: 15px;
+    width: 100%;
+    height: cover;
+    padding: 30px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-image: linear-gradient(to bottom right, #5ce1e6, #38b6ff, #5271ff);
+}
+
+.select-coin-image{
+    border-radius: 50%;
+    padding: 13px;
+    border: 3px solid black;
+}
+
+.select-coin-image:hover{
+    opacity: .7;
+    border: 7px solid rgb(43, 16, 165);
+}
+
+.select-coin-image img{
+    height: 60px;
+}
+
+.select-coin-image img:hover{
+    height: 65px;
+    border-radius: 15px solid rgb(43, 16, 165);
 }

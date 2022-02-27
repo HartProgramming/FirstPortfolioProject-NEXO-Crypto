@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    font-family: Nunito;
+    font-family: Questrial;
 }
 
 .navbar-custom {
@@ -65,12 +65,14 @@ body{
 }
 
 .dashboard-header{
-    height: 60px;
+    height: cover;
     background-color: rgb(0, 0, 0);
     width: 100%;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
     color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .token-div{
@@ -79,4 +81,16 @@ body{
     width: 100%;
     font-size: 20px;
     font-weight: 500;
+    padding-right: 45px;
+    position: relative;
+    border-bottom: 2px solid black;
 }
+
+.dashboard-token-img{
+    height: 50px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+
+

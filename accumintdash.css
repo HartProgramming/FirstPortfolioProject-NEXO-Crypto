@@ -41,20 +41,42 @@ body{
 
 .select-coin-image{
     border-radius: 50%;
-    padding: 13px;
+    padding: 5px;
+    margin-left: 17px;
+    margin-right: 17px;
+    margin-top: 5px;
     border: 3px solid black;
 }
 
-.select-coin-image:hover{
+.select-coin-image:hover, .select-coin-image:focus{
     opacity: .7;
-    border: 7px solid rgb(43, 16, 165);
+    box-shadow: 0 0.95em -.4em var(--hover);
+    transform: translateY(-.45em);
+    border: 5px solid rgb(0, 0, 0);
 }
 
 .select-coin-image img{
-    height: 60px;
+    height: 40px;
 }
 
-.select-coin-image img:hover{
-    height: 65px;
-    border-radius: 15px solid rgb(43, 16, 165);
+.select-coin-image img:hover, img:focus{
+    box-shadow: 0 0.2em -.1em var(--hover);
+    transform: translateY(-.05em);
+}
+
+.dashboard-header{
+    height: 60px;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.token-div{
+    height: 80px;
+    background-color: aliceblue;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
 }

@@ -28,41 +28,49 @@ const row = document.querySelector("#token-row");
 const bnb = document.querySelector("#bnb");
 const dai = document.querySelector("#dai");
 let count = 0;
-let port = document.querySelector(".header")
-const cryptoAmntInput = document.createElement("input");
-const cryptoTypeInput = document.createElement("input");
-
+let port = document.querySelector(".header");
 
 class Crypto {
-    constructor(pic, name, price, snap, amount, type) {
+    constructor(pic, name, price, snap) {
         this.pic = pic;
         this.name = name;
         this.price = price;
         this.snap = snap;
-        this.amount = amount;
-        this.type = type;
     }
-    creatEl(){
-       let input =  document.createElement("input")
-       input.value = 400
+    createAmntEl(){
+        let amtInput = document.createElement("input")
+            amtInput.type = "text";
+           return amtInput.value = "Insert Amount"
     }
-    
+    createTypeEl(){
+        let typeInput = document.createElement("input")
+        typeInput.setAttribute("type", "text");
+        return typeInput.value = "Credit/Loan"
+    }
     /* Function for determining Current Value */
 
     currentValue() {
-    return parseFloat(this.price * this.amount.value)
+    return parseFloat(this.price * this.createAmntEl())
     }/* Function for determing Snapshot Value */
 
     snapshotValue() {
-    return parseFloat(this.snap * this.amount.value)
+    return parseFloat(this.snap * this.createAmntEl())
 }
     gainLoss(){
         return parseFloat(this.currentValue() / this.snapshotValue()).toFixed(2) +"%"
     }
+    createEditButton(){
+        let edit = document.createElement("button")
+        return edit.innerText = "Edit"
+    }
+    createDeleteButton(){
+        let del = document.createElement("button")
+        return del.innerText = "Delete"
+    }
 }
 
-const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 50, 40, cryptoTypeInput)
-const ethereum = new Crypto("ethereum-eth-logo.png", "Ethereum", 50, 40, cryptoAmntInput,cryptoTypeInput)
+const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 50, 40)
+const ethereum = new Crypto("ethereum-eth-logo.png", "Ethereum", 50, 40)
 
 function insRow(x, name){
     let tokenImage = document.createElement("img")
@@ -74,19 +82,36 @@ function insRow(x, name){
     const cell2 = rowInsert.insertCell(2);
     const cell3 = rowInsert.insertCell(3);
     const cell4 = rowInsert.insertCell(4);
+    cell4.setAttribute("contenteditable", true)
+    cell4.setAttribute("style", "background-color: red;")
+    cell4.textContent = "500"
+    cell4.value = cell4.textContent
     const cell5 = rowInsert.insertCell(5);
+    cell5.textContent = parseFloat(cell4.value * cell2.textContent)
+    console.log(cell5.textContent)
     const cell6 = rowInsert.insertCell(6);
+    cell6.value = parseFloat(cell4.textContent * cell3.textContent)
+    cell6.innerHTML = cell6.value;
+    console.log(cell6.textContent)
     const cell7 = rowInsert.insertCell(7);
+    cell7.textContent = parseFloat(cell5.textContent / cell6.textContent)
+    console.log(cell7.textContent)
     const cell8 = rowInsert.insertCell(8);
+    cell8.setAttribute("contenteditable", true)
+    cell8.setAttribute("style", "background-color: red;")
+    const cell9 = rowInsert.insertCell(9);
+    cell9.setAttribute("type", "button")
+    cell9.setAttribute("style", "background-color: orange;")
+    cell9.textContent = "Edit"
+    const cell10 = rowInsert.insertCell(10);
+    cell10.setAttribute("type", "button")
+    cell10.setAttribute("style", "background-color: red;")
+    cell10.setAttribute("textContent", "delete")
+    cell10.textContent = "Delete"
     cell0.appendChild(tokenImage);
-    cell1.innerHTML = name.name;
-    cell2.innerHTML = name.price;
-    cell3.innerHTML = name.snap;
-    cell4.append(name.creatEl());
-    cell5.innerHTML = name.currentValue();
-    cell6.innerHTML = name.snapshotValue();
-    cell7.innerHTML = name.gainLoss();
-    cell8.append(name.type);
+    cell1.append(name.name);
+    cell2.textContent = name.price;
+    cell3.textContent = name.snap;
 }
 
 eth.addEventListener("click", function () {
@@ -103,6 +128,7 @@ cosmos.addEventListener("click",function(){
     insRow(count, cosmos) 
 })
 
+/*
 eos.addEventListener("click", function () {
     insRow(count, eos)
 })
@@ -198,3 +224,4 @@ ftm.addEventListener("click", function () {
 nexo.addEventListener("click", function () {
     insRow(count, nexoNexo)
 })
+*/

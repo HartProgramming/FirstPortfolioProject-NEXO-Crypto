@@ -75,6 +75,10 @@ body{
     padding-bottom: 10px;
 }
 
+.inputAmt{
+    width: 50px;
+}
+
 .token-div{
     height: 80px;
     background-color: aliceblue;

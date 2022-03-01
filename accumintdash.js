@@ -29,7 +29,7 @@ const bnb = document.querySelector("#bnb");
 const dai = document.querySelector("#dai");
 let count = 0;
 let port = document.querySelector(".header");
-
+let portArr = []
 class Crypto {
     constructor(pic, name, price, snap) {
         this.pic = pic;
@@ -68,11 +68,11 @@ class Crypto {
         return del.innerText = "Delete"
     }
 }
-
 const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 30, 40)
 const ethereum = new Crypto("ethereum-eth-logo.png", "Ethereum", 50, 40)
 
 function insRow(name){
+    
     let tokenImage = document.createElement("img")
     tokenImage.src = name.pic
     tokenImage.height = 25;
@@ -88,21 +88,13 @@ function insRow(name){
     cell4.height = 15;
     const cell5 = rowInsert.insertCell(5);
     cell5.innerHTML = parseFloat(cell4.textContent * cell2.textContent)
-    console.log(cell5.innerHTML)
     const cell6 = rowInsert.insertCell(6);
     cell6.value = parseFloat(cell4.textContent * cell3.textContent)
     cell6.innerHTML = cell6.value;
-    console.log(cell6.textContent)
     const cell7 = rowInsert.insertCell(7);
     cell7.textContent = parseFloat(cell5.textContent / cell6.textContent)
-    console.log(cell7.textContent)
     const cell8 = rowInsert.insertCell(8);
-    cell8.classList.add("dropdown")
-    cell8.classList.add("btn")
-    cell8.classList.add("btn-secondary")
-    cell8.classList.add("dropdown-toggle")
-    cell8.setAttribute("type", "button")
-    cell8.textContent = "Credit";
+    cell8.textContent = "Loan";
     cell8.setAttribute("style", "background-color: red;")
     const cell9 = rowInsert.insertCell(9);
     cell9.setAttribute("type", "button")
@@ -115,22 +107,15 @@ function insRow(name){
                 event.preventDefault()
                 cell4.setAttribute("contenteditable", false)
                 cell5.textContent = parseFloat(cell4.textContent * cell2.textContent)
-                console.log(cell5.textContent)
                 cell6.textContent =  parseFloat(cell4.textContent * cell3.textContent);
                 cell7.textContent = Math.floor((cell5.textContent / cell6.textContent) * 100) - 100 + "%" ;
-                function cvSum() {
-                    const port = document.querySelector("#port-val");
-                    let portArr = []
-                    portArr.push(cell5.textContent)
-                    console.log(portArr)
-                }
-                cvSum()
+                portArr.push(cell5.textContent)
+                console.log(portArr)
             }
         })
         cell8.addEventListener("keydown", function(event){
             if(event.keyCode === 13){
                 cell8.setAttribute("contenteditable", false)
-                
             }
         })
     })
@@ -141,6 +126,7 @@ function insRow(name){
     cell10.textContent = "Delete"
     cell10.addEventListener("click", function(){
         rowInsert.remove()
+        portArr.pop(cell5.textContent)
     })
     cell0.appendChild(tokenImage);
     cell1.append(name.name);
@@ -150,7 +136,7 @@ function insRow(name){
     
 }
 
-/* Sums up Current Value Columns */
+
 
 
 

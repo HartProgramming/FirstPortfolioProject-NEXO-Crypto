@@ -16,6 +16,14 @@ body{
   color: white;
 }
 
+#purpose{
+    height: cover;
+}
+
+.purpose-div{
+    height: cover;
+}
+
 .header{
     margin-top: 70px;
 }

@@ -37,35 +37,42 @@ class Crypto {
         this.price = price;
         this.snap = snap;
     }
-    createAmntEl(){
-        let amtInput = document.createElement("input")
-            amtInput.type = "text";
-           return amtInput.value = "Insert Amount"
+    createAmntEl(x){
+        x.setAttribute("style", "background-color: red;")
+        x.setAttribute("contenteditable", false)
+        x.textContent = "500"
+        return x.value = "Insert Amount"
     }
-    createTypeEl(){
-        let typeInput = document.createElement("input")
-        typeInput.setAttribute("type", "text");
-        return typeInput.value = "Credit/Loan"
+    createTypeEl(y){
+        y.setAttribute("style", "background-color: red;")
+        y.setAttribute("contenteditable", false)
+        y.textContent = "Loan"
+        return y.value = "Loan"
     }
     /* Function for determining Current Value */
 
-    currentValue() {
-    return parseFloat(this.price * this.createAmntEl())
+    currentValue(c, d, e) {
+        c.setAttribute("contenteditable", false)
+        return c.textContent = parseFloat(e.price * d.textContent)
     }/* Function for determing Snapshot Value */
 
-    snapshotValue() {
-    return parseFloat(this.snap * this.createAmntEl())
+    snapshotValue(h, g, f) {
+        h.setAttribute("contenteditable", false);
+        return h.textContent = parseFloat(f.snap * g.textContent)
 }
     gainLoss(){
         return parseFloat(this.currentValue() / this.snapshotValue()).toFixed(2) +"%"
     }
-    createEditButton(){
-        let edit = document.createElement("button")
-        return edit.innerText = "Edit"
+    createEditButton(b){
+        b.setAttribute("type", "button")
+        b.setAttribute("style", "background-color: orange;")
+        return b.textContent = "Edit";
     }
-    createDeleteButton(){
-        let del = document.createElement("button")
-        return del.innerText = "Delete"
+    createDeleteButton(a){
+        a.setAttribute("type", "button")
+        a.setAttribute("style", "background-color: red;")
+        a.setAttribute("textContent", "delete")
+        return a.textContent = "Delete"
     }
 }
 const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 30, 40)
@@ -82,48 +89,27 @@ function insRow(name){
     const cell2 = rowInsert.insertCell(2);
     const cell3 = rowInsert.insertCell(3);
     const cell4 = rowInsert.insertCell(4);
-    cell4.setAttribute("style", "background-color: red;")
-    cell4.setAttribute("contenteditable", false)
-    cell4.textContent = "500"
-    cell4.height = 15;
     const cell5 = rowInsert.insertCell(5);
-    cell5.innerHTML = parseFloat(cell4.textContent * cell2.textContent)
     const cell6 = rowInsert.insertCell(6);
-    cell6.value = parseFloat(cell4.textContent * cell3.textContent)
-    cell6.innerHTML = cell6.value;
     const cell7 = rowInsert.insertCell(7);
-    cell7.textContent = parseFloat(cell5.textContent / cell6.textContent)
     const cell8 = rowInsert.insertCell(8);
-    cell8.textContent = "Loan";
-    cell8.setAttribute("style", "background-color: red;")
     const cell9 = rowInsert.insertCell(9);
-    cell9.setAttribute("type", "button")
-    cell9.setAttribute("style", "background-color: orange;")
-    cell9.textContent = "Edit";
+    
     cell9.addEventListener("click", function(){
         cell4.setAttribute("contenteditable", true);
         cell4.addEventListener("keydown",function(event){
             if(event.keyCode === 13){
-                event.preventDefault()
                 cell4.setAttribute("contenteditable", false)
-                cell5.textContent = parseFloat(cell4.textContent * cell2.textContent)
-                cell6.textContent =  parseFloat(cell4.textContent * cell3.textContent);
-                cell7.textContent = Math.floor((cell5.textContent / cell6.textContent) * 100) - 100 + "%" ;
-                portArr.push(cell5.textContent)
-                console.log(portArr)
-            }
-        })
-        cell8.addEventListener("keydown", function(event){
-            if(event.keyCode === 13){
-                cell8.setAttribute("contenteditable", false)
+                cell5.textContent = name.currentValue(cell5, cell4, name);
+                cell6.textContent = name.snapshotValue(cell6, cell4, name);
+                cell7.textContent = Math.floor((cell5.textContent / cell6.textContent) * 100) - 100 + "%";
+
             }
         })
     })
+    portArr.push(cell5.textContent)
+    console.log(portArr)
     const cell10 = rowInsert.insertCell(10);
-    cell10.setAttribute("type", "button")
-    cell10.setAttribute("style", "background-color: red;")
-    cell10.setAttribute("textContent", "delete")
-    cell10.textContent = "Delete"
     cell10.addEventListener("click", function(){
         rowInsert.remove()
         portArr.pop(cell5.textContent)
@@ -132,8 +118,10 @@ function insRow(name){
     cell1.append(name.name);
     cell2.textContent = name.price;
     cell3.textContent = name.snap;
-
-    
+    cell4.value = name.createAmntEl(cell4);
+    cell8.textContent = name.createTypeEl(cell8);
+    cell9.textContent = name.createEditButton(cell9);
+    cell10.textContent = name.createDeleteButton(cell10);
 }
 
 

@@ -1,3 +1,5 @@
+const { default: axios } = require("axios");
+
 const btcImg = document.querySelector("#bitcoin");
 const eth = document.querySelector("#ethereum");
 const ada = document.querySelector("#cardano");
@@ -75,6 +77,24 @@ class Crypto {
         return a.textContent = "Delete"
     }
 }
+
+
+
+
+const fetchBitcoinPrice = async()=>{
+    try {
+        const res = await axios.get("https://api.cryptonator.com/api/ticker/btc-usd")
+        console.log(res.data.ticker.price)
+    } catch (e){
+        console.log("error", e)
+    }
+}
+
+fetchBitcoinPrice()
+
+
+
+
 const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 30, 40)
 const ethereum = new Crypto("ethereum-eth-logo.png", "Ethereum", 50, 40)
 
@@ -103,17 +123,16 @@ function insRow(name){
                 cell5.textContent = name.currentValue(cell5, cell4, name);
                 cell6.textContent = name.snapshotValue(cell6, cell4, name);
                 cell7.textContent = Math.floor((cell5.textContent / cell6.textContent) * 100) - 100 + "%";
-
             }
         })
     })
-    portArr.push(cell5.textContent)
     console.log(portArr)
     const cell10 = rowInsert.insertCell(10);
     cell10.addEventListener("click", function(){
         rowInsert.remove()
         portArr.pop(cell5.textContent)
     })
+    
     cell0.appendChild(tokenImage);
     cell1.append(name.name);
     cell2.textContent = name.price;
@@ -124,7 +143,7 @@ function insRow(name){
     cell10.textContent = name.createDeleteButton(cell10);
 }
 
-
+console.log(portArr)
 
 
 

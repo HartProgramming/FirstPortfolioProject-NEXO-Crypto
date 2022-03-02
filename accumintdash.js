@@ -1,4 +1,4 @@
-
+/* QuerySelector for buttons of coins */
 const btcImg = document.querySelector("#bitcoin");
 const eth = document.querySelector("#ethereum");
 const ada = document.querySelector("#cardano");
@@ -25,25 +25,34 @@ const paxUS = document.querySelector("#paxus")
 const eos = document.querySelector("#eos")
 const doge = document.querySelector("#doge")
 const cosmos = document.querySelector("#cosmos")
-const row = document.querySelector("#token-row");
 const bnb = document.querySelector("#bnb");
 const dai = document.querySelector("#dai");
-let count = 0;
+
+/* Query selector for header class */
 let port = document.querySelector(".header");
+
+/* Query selector for tbody - used to insert rows */
+const row = document.querySelector("#token-row");
+
+/* Array for the sum of the portfolio current value - array indexes represent each individual current value cell in the table 
+STILL NEED TO FIGURE OUT ACCURATE PUSH AND POP */
 let portArr = []
+
+/* CRYPTO CLASS - This allows for each crypto button to inherit the CRYPTO object attributes - image, name, edit & delete button, amt of crypto input, current & snaphshot value functions, p/l % function */
 class Crypto {
-    constructor(pic, name, price, snap) {
+    constructor(pic, name, snap) {
         this.pic = pic;
         this.name = name;
-        this.price = price;
         this.snap = snap;
     }
+    /* Function for amount of crypto owned - allows for edit */
     createAmntEl(x){
         x.setAttribute("style", "background-color: red;")
         x.setAttribute("contenteditable", false)
         x.textContent = "500"
         return x.value = "Insert Amount"
     }
+    /* Function for the type of state the money is in creidt or loan*/
     createTypeEl(y){
         y.setAttribute("style", "background-color: red;")
         y.setAttribute("contenteditable", false)
@@ -51,24 +60,26 @@ class Crypto {
         return y.value = "Loan"
     }
     /* Function for determining Current Value */
-
     currentValue(c, d, e) {
         c.setAttribute("contenteditable", false)
         return c.textContent = parseFloat(e.price * d.textContent)
-    }/* Function for determing Snapshot Value */
-
+    }
+    /* Function for determing Snapshot Value */
     snapshotValue(h, g, f) {
         h.setAttribute("contenteditable", false);
         return h.textContent = parseFloat(f.snap * g.textContent)
-}
+    }
+    /* P/L % function */
     gainLoss(){
         return parseFloat(this.currentValue() / this.snapshotValue()).toFixed(2) +"%"
     }
+    /* Edit button created */
     createEditButton(b){
         b.setAttribute("type", "button")
         b.setAttribute("style", "background-color: orange;")
         return b.textContent = "Edit";
     }
+    /* Delete buttion created */
     createDeleteButton(a){
         a.setAttribute("type", "button")
         a.setAttribute("style", "background-color: red;")
@@ -83,7 +94,7 @@ class Crypto {
 
 
 
-const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 30, 40)
+const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 40)
 const ethereum = new Crypto("ethereum-eth-logo.png", "Ethereum", 50, 40)
 
 function insRow(name){
@@ -97,6 +108,11 @@ function insRow(name){
     const cell2 = rowInsert.insertCell(2);
     const cell3 = rowInsert.insertCell(3);
     const cell4 = rowInsert.insertCell(4);
+    async function fetchCP(price) {
+        const config = { params: { ids : price }, headers: { Accept: "application/json" } }
+        const res = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=" + price + "&vs_currencies=usd", config)
+        return cell2.textContent = res.data.price.usd
+    }
     const cell5 = rowInsert.insertCell(5);
     const cell6 = rowInsert.insertCell(6);
     const cell7 = rowInsert.insertCell(7);
@@ -120,10 +136,11 @@ function insRow(name){
         rowInsert.remove()
         portArr.pop(cell5.textContent)
     })
+
     
     cell0.appendChild(tokenImage);
     cell1.append(name.name);
-    cell2.textContent = name.price;
+    cell2.textContent = fetchCP(cell1.textContent);
     cell3.textContent = name.snap;
     cell4.value = name.createAmntEl(cell4);
     cell8.textContent = name.createTypeEl(cell8);
@@ -134,7 +151,7 @@ function insRow(name){
 console.log(portArr)
 
 
-
+/* Button functions that insert a row via the Crypto Class */
 eth.addEventListener("click", function () {
     insRow(ethereum)
 })

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Nunito;
+  font-family: Questrial;
   font-weight: 400;
   background-color: rgb(240, 238, 238);
 }
@@ -12,7 +12,6 @@ body {
 
 .company {
   color: white;
-  font-family: Nunito;
   font-weight: 500;
   font-size: 25px;
 }
@@ -58,7 +57,6 @@ header {
 .header-company-name {
   display: block;
   font-size: 60px;
-  font-family: Nunito;
   font-weight: 700;
 }
 
@@ -128,6 +126,10 @@ header {
   letter-spacing: 2px;
 }
 
+.custom-logo-flex{
+  margin-top: 50px;
+}
+
 #accumint {
   background-image: linear-gradient(
     to bottom right,
@@ -147,9 +149,13 @@ header {
   text-transform: uppercase;
 }
 
+#accumint-paragraph{
+  margin-top: 50px;
+}
+
 
 #wheelLogo{
-  height: 400px;
+  height: 100px;
   animation: rotationWheel 6s infinite linear;
   backface-visibility: hidden;
 }

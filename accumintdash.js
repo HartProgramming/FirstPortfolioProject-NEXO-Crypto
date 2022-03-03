@@ -45,6 +45,7 @@ class Crypto {
         this.name = name;
         this.snap = snap;
     }
+    
     /* Function for amount of crypto owned - allows for edit */
     createAmntEl(x){
         x.setAttribute("style", "background-color: red;")
@@ -61,12 +62,10 @@ class Crypto {
     }
     /* Function for determining Current Value */
     currentValue(c, d, e) {
-        c.setAttribute("contenteditable", false)
-        return c.textContent = parseFloat(e.price * d.textContent)
+        return c.textContent = parseFloat(e.textContent * d.textContent)
     }
     /* Function for determing Snapshot Value */
     snapshotValue(h, g, f) {
-        h.setAttribute("contenteditable", false);
         return h.textContent = parseFloat(f.snap * g.textContent)
     }
     /* P/L % function */
@@ -75,9 +74,7 @@ class Crypto {
     }
     /* Edit button created */
     createEditButton(b){
-        b.setAttribute("type", "button")
-        b.setAttribute("style", "background-color: orange;")
-        return b.textContent = "Edit";
+        
     }
     /* Delete buttion created */
     createDeleteButton(a){
@@ -88,14 +85,10 @@ class Crypto {
     }
 }
 
+/* Declare Crypto Coin classes */
 
-
-
-
-
-
-const bitcoin = new Crypto("bitcoin-btc-logo.png", "Bitcoin", 40)
-const ethereum = new Crypto("ethereum-eth-logo.png", "Ethereum", 50, 40)
+const bitcoin = new Crypto("bitcoin-btc-logo.png", "bitcoin", 40)
+const ethereum = new Crypto("ethereum-eth-logo.png", "ethereum", 50)
 
 function insRow(name){
     
@@ -105,27 +98,41 @@ function insRow(name){
     let rowInsert = row.insertRow();
     const cell0 = rowInsert.insertCell(-1);
     const cell1 = rowInsert.insertCell(1);
+    cell1.style.textTransform = "capitalize"
     const cell2 = rowInsert.insertCell(2);
     const cell3 = rowInsert.insertCell(3);
     const cell4 = rowInsert.insertCell(4);
-    async function fetchCP(price) {
-        const config = { params: { ids : price }, headers: { Accept: "application/json" } }
-        const res = await axios.get("https://api.coingecko.com/api/v3/simple/price?ids=" + price + "&vs_currencies=usd", config)
-        return cell2.textContent = res.data.price.usd
-    }
     const cell5 = rowInsert.insertCell(5);
     const cell6 = rowInsert.insertCell(6);
     const cell7 = rowInsert.insertCell(7);
     const cell8 = rowInsert.insertCell(8);
     const cell9 = rowInsert.insertCell(9);
-    
+    cell9.setAttribute("type", "button")
+    cell9.classList.add("btn")
+    cell9.classList.add("btn-lg")
+    cell9.classList.add("btn-block")
+    cell9.classList.add("btn-primary")
+    cell9.textContent = "Edit";
+    /* Gets the current price of the crypto */
+
+    async function fetchCP(price, x) {
+        const config = { headers: { Accept: "application/json" } }
+        const cool = "usd"
+        const params = {
+            ids: price,
+            vs_currencies: cool
+        }
+        const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(params.ids)}&vs_currencies=${encodeURIComponent(params.vs_currencies)}`, config)
+        x.textContent = res.data[price][cool]
+        console.log(res.data[price][cool])
+}
     cell9.addEventListener("click", function(){
         cell4.setAttribute("contenteditable", true);
         cell4.addEventListener("keydown",function(event){
             if(event.keyCode === 13){
                 cell4.setAttribute("contenteditable", false)
-                cell5.textContent = name.currentValue(cell5, cell4, name);
-                cell6.textContent = name.snapshotValue(cell6, cell4, name);
+                cell5.textContent = name.currentValue(cell5, cell4, cell2);
+                cell6.textContent = name.snapshotValue(cell6, cell4, cell2);
                 cell7.textContent = Math.floor((cell5.textContent / cell6.textContent) * 100) - 100 + "%";
             }
         })
@@ -137,14 +144,13 @@ function insRow(name){
         portArr.pop(cell5.textContent)
     })
 
-    
     cell0.appendChild(tokenImage);
     cell1.append(name.name);
-    cell2.textContent = fetchCP(cell1.textContent);
+    cell2.textContent = setInterval(fetchCP(cell1.textContent, cell2), 10000);
     cell3.textContent = name.snap;
-    cell4.value = name.createAmntEl(cell4);
+    cell4.textContent = name.createAmntEl(cell4);
+    cell5.textContent = parseFloat(cell2.textContent * cell4.textContent)
     cell8.textContent = name.createTypeEl(cell8);
-    cell9.textContent = name.createEditButton(cell9);
     cell10.textContent = name.createDeleteButton(cell10);
 }
 
@@ -161,7 +167,7 @@ btcImg.addEventListener("click",function(){
 })
 
 cosmos.addEventListener("click",function(){
-    insRow(count, cosmos) 
+    insRow(cosmos) 
 })
 
 /*

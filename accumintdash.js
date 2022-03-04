@@ -73,8 +73,10 @@ class Crypto {
         return parseFloat(this.currentValue() / this.snapshotValue()).toFixed(2) +"%"
     }
     /* Edit button created */
-    createEditButton(b){
-        
+    createEditButton(x){
+        x.setAttribute("type", "button")
+        x.classList.add("edit-btn")
+       return x.textContent = "Edit";
     }
     /* Delete buttion created */
     createDeleteButton(a){
@@ -107,25 +109,37 @@ function insRow(name){
     const cell7 = rowInsert.insertCell(7);
     const cell8 = rowInsert.insertCell(8);
     const cell9 = rowInsert.insertCell(9);
-    cell9.setAttribute("type", "button")
-    cell9.classList.add("btn")
-    cell9.classList.add("btn-lg")
-    cell9.classList.add("btn-block")
-    cell9.classList.add("btn-primary")
-    cell9.textContent = "Edit";
+   
     /* Gets the current price of the crypto */
 
     async function fetchCP(price, x) {
-        const config = { headers: { Accept: "application/json" } }
-        const cool = "usd"
-        const params = {
-            ids: price,
-            vs_currencies: cool
-        }
-        const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(params.ids)}&vs_currencies=${encodeURIComponent(params.vs_currencies)}`, config)
-        x.textContent = res.data[price][cool]
-        console.log(res.data[price][cool])
+       setInterval(async function () {
+            const config = { headers: { Accept: "application/json" } }
+            const cool = "usd"
+            const params = {
+                ids: price,
+                vs_currencies: cool
+            }
+            const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(params.ids)}&vs_currencies=${encodeURIComponent(params.vs_currencies)}`, config)
+            x.textContent = res.data[price][cool]
+            console.log(res.data[price][cool])
+        }, 15000);
+        
 }
+
+    async function collectCP(price, x) {
+            const config = { headers: { Accept: "application/json" } }
+            const cool = "usd"
+            const params = {
+                ids: price,
+                vs_currencies: cool
+            }
+            const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(params.ids)}&vs_currencies=${encodeURIComponent(params.vs_currencies)}`, config)
+            x.textContent = res.data[price][cool]
+            console.log(res.data[price][cool])
+        };
+
+
     cell9.addEventListener("click", function(){
         cell4.setAttribute("contenteditable", true);
         cell4.addEventListener("keydown",function(event){
@@ -146,16 +160,18 @@ function insRow(name){
 
     cell0.appendChild(tokenImage);
     cell1.append(name.name);
-    cell2.textContent = setInterval(fetchCP(cell1.textContent, cell2), 10000);
+    cell2.textContent = collectCP(cell1.textContent, cell2)
+    cell2.textContent = fetchCP(cell1.textContent, cell2);
     cell3.textContent = name.snap;
     cell4.textContent = name.createAmntEl(cell4);
-    cell5.textContent = parseFloat(cell2.textContent * cell4.textContent)
+    cell5.textContent = setInterval(parseFloat(cell2.textContent * cell4.textContent), 15000);
+    console.log(cell5.textContent)
     cell8.textContent = name.createTypeEl(cell8);
+    cell9.textContent = name.createEditButton(cell9)
     cell10.textContent = name.createDeleteButton(cell10);
 }
 
 console.log(portArr)
-
 
 /* Button functions that insert a row via the Crypto Class */
 eth.addEventListener("click", function () {

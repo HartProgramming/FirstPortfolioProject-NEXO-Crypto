@@ -58,4 +58,21 @@ function insRow(name) {
 
 }
 
-14760
+
+
+
+async function collectCP(price, x) {
+    const config = { headers: { Accept: "application/json" } }
+    const cool = "usd"
+    const params = {
+        ids: price,
+        vs_currencies: cool
+    }
+    const res = await axios.get(`https://api.coingecko.com/api/v3/coins/${encodeURIComponent(params.ids)}/market_chart/range?vs_currency=usd&from=1646286604&to=1646287084`, config)
+    x.textContent = res.data[price][cool]
+    console.log(res.data[price][cool])
+};
+
+
+
+

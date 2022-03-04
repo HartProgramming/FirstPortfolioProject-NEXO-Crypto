@@ -12,6 +12,10 @@ body{
   color: white;
 }
 
+.right {
+    margin-left: 40%;
+}
+
 .navbar-dark .navbar-custom {
   color: white;
 }
@@ -46,6 +50,12 @@ body{
     flex-wrap: wrap;
     justify-content: space-evenly;
     background-image: linear-gradient(to bottom right, #5ce1e6, #38b6ff, #5271ff);
+}
+
+.edit-btn{
+    background-color: blue;
+    color: white;
+    width: 200px;
 }
 
 .select-coin-image{

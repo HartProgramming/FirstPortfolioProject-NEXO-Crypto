@@ -59,7 +59,13 @@ function insRow(name) {
 }
 
 
-
+let date = new Date()
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+let hours = 00;
+let minutes = 50;
+console.log(date)
 
 async function collectCP(price, x) {
     const config = { headers: { Accept: "application/json" } }
@@ -73,6 +79,44 @@ async function collectCP(price, x) {
     console.log(res.data[price][cool])
 };
 
+1646373004
+1646459404
+1646545804
+
+86400
+set a time interval for 24hours on the function???
+
+const bitcoin = new Crypto("bitcoin-btc-logo.png", "bitcoin", 40)
+const ethereum = new Crypto("ethereum-eth-logo.png", "ethereum", 50)
+const cardano = new Crypto("cardano-ada-logo.png", "cardano", 40)
+const solana = new Crypto("solana-sol-logo.png", "solana", 40)
+const cosmos = new Crypto("cosmos-atom-logo.png", "cosmos", 40)
+const polkadot = new Crypto("polkadot-new-dot-logo.png", "polkadot", 40)
+const polygon = new Crypto("polygon-matic-logo.png", "polygon", 40)
+const avalanche = new Crypto("avalanche-avax-logo.png", "avalanche", 40)
+const paxGold = new Crypto("pax-gold-paxg-logo.png", "", 40)
+const paxUS = new Crypto("paxos-standard-usdp-logo.png", "bitcoin", 40)
+const tronTron = new Crypto("tron-trx-logo.png", "tron", 40)
+const nexoNexo = new Crypto("nexo-nexo-logo.png", "nexo", 40)
+const terraLuna = new Crypto("terra-luna-luna-logo.png", "bitcoin", 40)
+const dogecoin = new Crypto("dogecoin-doge-logo.png", "dogecoin", 40)
+const fantom = new Crypto("fantom-ftm-logo.png", "fantom", 40)
+const stableDollar = new Crypto("usd-coin-usdc-logo.png", "usdc", 40)
+const bitcoinCash = new Crypto("bitcoin-cash-bch-logo.png", "", 40)
+const trueUSD = new Crypto("trueusd-tusd-logo.png", "bitcoin", 40)
+const axieFinity = new Crypto("axie-infinity-axs-logo.png", "bitcoin", 40)
+const stellarLumens = new Crypto("stellar-xlm-logo.png", "bitcoin", 40)
+const daiMulti = new Crypto("multi-collateral-dai-logo.png", "bitcoin", 40)
+const tetherUSD = new Crypto("tether-usdt-logo.png", "bitcoin", 40)
+const litecoin = new Crypto("litecoin-ltc-logo.png", "chainlink", 40)
+const axieINF = new Crypto("axie-infinity-axs-logo.png", "chainlink", 40)
+const rippleLabs = new Crypto("xrp-xrp-logo.png", "chainlink", 40)
+const binanceBNB = new Crypto("bnb-bnb-logo.png", "chainlink", 40)
+const eosCoin = new Crypto("eos-eos-logo.png", "chainlink", 40)
+
+/* Need edit */
+
+polygon
 
 
-
+pax stableDollar

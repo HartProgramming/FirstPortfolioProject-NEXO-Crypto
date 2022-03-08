@@ -1,32 +1,32 @@
 /* QuerySelector for buttons of coins */
-const btc = document.querySelector("#bitcoin");
-const eth = document.querySelector("#ethereum");
-const ada = document.querySelector("#cardano");
-const avax = document.querySelector("#avalanche");
-const sol = document.querySelector("#solana");
+const btc = document.querySelector("#btc");
+const eth = document.querySelector("#eth");
+const ada = document.querySelector("#ada");
+const avax = document.querySelector("#avax");
+const sol = document.querySelector("#sol");
 const terra = document.querySelector("#terra");
 const usdc = document.querySelector("#usdc");
 const btcCash = document.querySelector("#btccash");
-const nexo = document.querySelector("#nexo");
-const ltc = document.querySelector("#litecoin");
-const dot = document.querySelector("#polkadot");
+const nexo = document.querySelector("#nexo-nexo");
+const ltc = document.querySelector("#ltc");
+const dot = document.querySelector("#dot");
 const matic = document.querySelector("#polygon");
 const axie = document.querySelector("#axie");
-const ftm = document.querySelector("#fantom");
-const kus = document.querySelector("#kusama");
-const xlm = document.querySelector("#stellar");
+const ftm = document.querySelector("#ftm");
+const kus = document.querySelector("#kus");
+const xlm = document.querySelector("#xlm");
 const xrp = document.querySelector("#xrp");
-const tUSD = document.querySelector("#trueusd");
-const ust = document.querySelector("#tether");
-const link = document.querySelector("#chainlink");
-const tron = document.querySelector("#tron");
+const tUSD = document.querySelector("#tusd");
+const ust = document.querySelector("#ust");
+const link = document.querySelector("#link");
+const tron = document.querySelector("#tron-tron");
 const pxg = document.querySelector("#paxgold");
 const pxu = document.querySelector("#paxus");
-const eos = document.querySelector("#eos");
-const doge = document.querySelector("#dogecoin");
-const atom = document.querySelector("#cosmos");
+const eos = document.querySelector("#eos-eos");
+const doge = document.querySelector("#doge");
+const atom = document.querySelector("#atom");
 const bnb = document.querySelector("#bnb");
-const dai = document.querySelector("#dai");
+const dai = document.querySelector("#dai-dai");
 
 /* Queryselector of Total Portfolio Values */
 const portValue = document.querySelector("#port-val")
@@ -143,7 +143,7 @@ let sum = 0;
 let add = 0;
 
 /* Function to insert row upon each button click */
-function insRow(name, count) {
+function insRow(name, count, sum) {
 
     /* tokenImage enables appending of Crypto Logo */
     let tokenImage = document.createElement("img")
@@ -256,55 +256,33 @@ function insRow(name, count) {
 }
 
 /* Sums the total of each current value cell */
-function addSum(sum) {
-    countSum = 0;
-    sum = 0;
-    if(countSum === 0){
-    sum = document.getElementById(`${countSum}`).cells[5].innerText;
-    countSum += 1;
-    }
-    else if(countSum === 1){
-    um += document.getElementById(`${countSum}`).cells[5].innerText;
+function addSum(coin){
+    console.log(document.getElementById(`${coin.name}`))
 }
-    portValue.textContent = parseFloat(totalSum)
-
-    
-}
-
-
-refreshBtn.addEventListener("click", function(){
-    addSum(sum)
-})
-
-
 
 /* Sums the total of each snapshot value cell */
-function snapSum(add, count){
-    setInterval(() => {
-        let totalSum = 0;
-        add = parseFloat(document.getElementById(`0`).cells[6].innerText)
-        totalSum += add
-        if (count > 0) {
-            totalSum += parseFloat(document.getElementById(`${count}`).cells[6].innerText)
-            snapValue.textContent = totalSum
-        }
-    }, 3000);
-    
+function snapSum(){
+    snapValue.textContent = document.getElementById("ethereum").cells[6].innerText;
 }
 
 /* Calculates the percentage profit/loss between current and snapshot value */
 function percentPort(port, snap, percent){
-    setInterval(() => {
        percent.textContent = Math.floor(((port.textContent / snap.textContent) * 100) - 100).toFixed(2);
-    }, 3000);
+    
 }
+
+
+
+refreshBtn.addEventListener("click", function () {
+    addSum(ethereum)
+    snapSum()
+})
 
 
 
 /* Button functions that insert a row via the Crypto Class */
 eth.addEventListener("click", function () {
     insRow(ethereum, count, sum);
-    snapSum(add, count)
     count += 1;
 })
 

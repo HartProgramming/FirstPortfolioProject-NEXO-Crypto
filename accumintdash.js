@@ -32,6 +32,7 @@ const dai = document.querySelector("#dai");
 const portValue = document.querySelector("#port-val")
 const snapValue = document.querySelector("#snap-val")
 const percentPL = document.querySelector("#gain-loss")
+const refreshBtn = document.querySelector("#refresh")
 
 /* Date Object that finds the current date of the snapshot and creates two UNIX timestamps to pass into coingecko api */
 let date = new Date();
@@ -50,7 +51,7 @@ let dateTwo = Date.UTC(year, month, day, hour, minute2).toString();
 let port = document.querySelector(".header");
 
 /* Query selector for tbody - used to insert rows */
-const row = document.querySelector("#token-row");
+let row = document.querySelector("#token-row");
 
 /* Array for the sum of the portfolio current value - array indexes represent each individual current value cell in the table 
 STILL NEED TO FIGURE OUT ACCURATE PUSH AND POP */
@@ -143,13 +144,22 @@ let add = 0;
 
 /* Function to insert row upon each button click */
 function insRow(name, count) {
+
     /* tokenImage enables appending of Crypto Logo */
     let tokenImage = document.createElement("img")
     tokenImage.src = name.pic
     tokenImage.height = 45;
+
+    /* rowInsert inserts a new row based on the count */
     let rowInsert = row.insertRow(count);
-    rowInsert.id = count;
+    let rowLength = document.getElementById("token-row").rows.length;
+    console.log(rowLength)
+    rowInsert.id = name.name;
+    console.log(rowInsert.id)
     rowInsert.classList.add("row-insert")
+
+    /* Insert cells in each row - token image, token name, current price
+    nexo snapshot price, amount, current value, snapshot value, proift/loss %, credit/loan, eidt/delete */
     const cell0 = rowInsert.insertCell(-1);
     const cell1 = rowInsert.insertCell(1);
     cell1.setAttribute("style", "text-transform: capitalize;")
@@ -168,8 +178,8 @@ function insRow(name, count) {
     cell10.setAttribute("type", "button")
     cell10.setAttribute("style", "background-image: linear-gradient(to bottom right,rgb(255, 205, 136),rgb(107, 29, 107))")
     cell10.classList.add("delete-btn")
-    /* Gets the current price of the crypto */
-
+    
+    /* Gets the current price of the crypto every 10 seconds*/
     async function fetchCP(crypto, currentPrice, updateCV, amnt) {
         setInterval(async function () {
             const config = { headers: { Accept: "application/json" } }
@@ -186,6 +196,7 @@ function insRow(name, count) {
 
     }
 
+    /* Initial fetch of current price */
     async function collectCP(price, x) {
         const config = { headers: { Accept: "application/json" } }
         const params = {
@@ -195,6 +206,7 @@ function insRow(name, count) {
         x.textContent = res.data[price].usd.toFixed(2)
     };
 
+    /* Fetch the snapshot price at 00:50:00 AM EST */
     async function collectSP(price, spText, svText, amnt, time1, time2) {
         let firstSlice = time1.slice(0, 10)
         let secondSlice = time2.slice(0, 10)
@@ -211,7 +223,7 @@ function insRow(name, count) {
         svText.textContent = parseFloat(spText.textContent * amnt.textContent).toFixed(2);
     };
 
-
+    /* Edit button */
     cell9.addEventListener("click", function () {
         cell4.setAttribute("contenteditable", true);
         cell4.addEventListener("keydown", function (event) {
@@ -223,13 +235,14 @@ function insRow(name, count) {
             }
         })
     })
+
+    /* Delete button */
     cell10.addEventListener("click", function () {
         rowInsert.remove()
-
         console.log(count)
     })
 
-
+    /* Actions on each cell - end of function */
     cell0.appendChild(tokenImage);
     cell1.append(name.name)
     cell2.textContent = collectCP(cell1.textContent, cell2)
@@ -242,31 +255,44 @@ function insRow(name, count) {
     cell10.textContent = "Delete";
 }
 
-function addSum(sum, count) {
-    setInterval(() => {
-            let total = 0;
-            sum = parseFloat(document.getElementById(`0`).cells[5].innerText)
-            total += sum
-        if (count > 0) {
-            total += parseFloat(document.getElementById(`${count}`).cells[5].innerText)
-            portValue.textContent = total
-        }
-    }, 3000);
+/* Sums the total of each current value cell */
+function addSum(sum) {
+    countSum = 0;
+    sum = 0;
+    if(countSum === 0){
+    sum = document.getElementById(`${countSum}`).cells[5].innerText;
+    countSum += 1;
+    }
+    else if(countSum === 1){
+    um += document.getElementById(`${countSum}`).cells[5].innerText;
+}
+    portValue.textContent = parseFloat(totalSum)
+
+    
 }
 
+
+refreshBtn.addEventListener("click", function(){
+    addSum(sum)
+})
+
+
+
+/* Sums the total of each snapshot value cell */
 function snapSum(add, count){
     setInterval(() => {
-        let total = 0;
+        let totalSum = 0;
         add = parseFloat(document.getElementById(`0`).cells[6].innerText)
-        total += add
+        totalSum += add
         if (count > 0) {
-            total += parseFloat(document.getElementById(`${count}`).cells[6].innerText)
-            snapValue.textContent = total
+            totalSum += parseFloat(document.getElementById(`${count}`).cells[6].innerText)
+            snapValue.textContent = totalSum
         }
     }, 3000);
     
 }
 
+/* Calculates the percentage profit/loss between current and snapshot value */
 function percentPort(port, snap, percent){
     setInterval(() => {
        percent.textContent = Math.floor(((port.textContent / snap.textContent) * 100) - 100).toFixed(2);
@@ -278,7 +304,6 @@ function percentPort(port, snap, percent){
 /* Button functions that insert a row via the Crypto Class */
 eth.addEventListener("click", function () {
     insRow(ethereum, count, sum);
-    addSum(sum, count)
     snapSum(add, count)
     count += 1;
 })

@@ -83,27 +83,14 @@ class Crypto {
     }
     /* Function for determing Snapshot Value */
     snapshotValue(h, g, f) {
-        return h.textContent = parseFloat(f.textContent * g.textContent)
+        return h.textContent = parseFloat(f.textContent * g.textContent).toFixed(2)
     }
     /* P/L % function */
     gainLoss() {
         return parseFloat(this.currentValue() / this.snapshotValue()).toFixed(2) + "%"
     }
     /* Edit button created */
-    createEditButton(x) {
-        x.classList.add("btn")
-        x.classList.add("btn-outline-primary")
-        x.setAttribute("width", "50%")
-        return x.textContent = "Edit";
-    }
-    /* Delete buttion created */
-    createDeleteButton(a) {
-        a.classList.add("btn")
-        a.classList.add("btn-outline-primary")
-        a.setAttribute("width", "100%")
-        a.setAttribute("margin-left", "20px")
-        return a.textContent = "Delete"
-    }
+   
 }
 
 /* Declare Crypto Coin classes */
@@ -143,7 +130,7 @@ let sum = 0;
 let add = 0;
 
 /* Function to insert row upon each button click */
-function insRow(name, count, sum) {
+function insRow(name, count) {
 
     /* tokenImage enables appending of Crypto Logo */
     let tokenImage = document.createElement("img")
@@ -151,9 +138,8 @@ function insRow(name, count, sum) {
     tokenImage.height = 45;
 
     /* rowInsert inserts a new row based on the count */
-    let rowInsert = row.insertRow(count);
-    let rowLength = document.getElementById("token-row").rows.length;
-    console.log(rowLength)
+    let rowInsert = row.insertRow();
+    
     rowInsert.id = name.name;
     console.log(rowInsert.id)
     rowInsert.classList.add("row-insert")
@@ -167,7 +153,11 @@ function insRow(name, count, sum) {
     const cell3 = rowInsert.insertCell(3);
     const cell4 = rowInsert.insertCell(4);
     const cell5 = rowInsert.insertCell(5);
+    cell5.classList.add("count-cv");
+    cell5.textContent = ""
     const cell6 = rowInsert.insertCell(6);
+    cell6.classList.add("count-sv")
+    cell6.textContent = ""
     const cell7 = rowInsert.insertCell(7);
     const cell8 = rowInsert.insertCell(8);
     const cell9 = rowInsert.insertCell(9);
@@ -231,8 +221,9 @@ function insRow(name, count, sum) {
                 cell4.setAttribute("contenteditable", false)
                 cell5.textContent = name.currentValue(cell5, cell4, cell2);
                 cell6.textContent = name.snapshotValue(cell6, cell4, cell3);
-                cell7.textContent = Math.floor(((cell5.textContent / cell6.textContent) * 100) - 100).toFixed(2) + "%";
-            }
+                console.log(cell6.textContent)
+                cell7.textContent = parseFloat(((cell5.textContent / cell6.textContent)* 100) - 100).toFixed(2) + "%";
+    }
         })
     })
 
@@ -249,38 +240,56 @@ function insRow(name, count, sum) {
     cell2.textContent = fetchCP(cell1.textContent, cell2, cell5, cell4);
     cell3.textContent = collectSP(cell1.textContent, cell3, cell6, cell4, dateOne, dateTwo);
     cell4.textContent = name.createAmntEl(cell4);
-    console.log(cell5.textContent)
     cell8.textContent = name.createTypeEl(cell8);
     cell9.textContent = "Edit"
     cell10.textContent = "Delete";
 }
 
-/* Sums the total of each current value cell */
-function addSum(coin){
-    console.log(document.getElementById(`${coin.name}`))
-}
+/* Sums the total of each current value cell, snapshot value cell, and p/l % */
+
+refreshBtn.addEventListener("click", function(){
+    let currentTotal = 0;
+    let snapTotal = 0;
+    let currentArr = [];
+    let snapArr = [];
+    let tds = document.getElementById("token-row").getElementsByTagName("td")
+    let tdSnap = document.getElementById("token-row").getElementsByTagName("td")
+    for(let i = 0; i < tds.length; i++){
+        if(tds[i].className === "count-cv"){
+            currentArr.push(parseFloat(tds[i].innerText))
+            const sumCurrent = currentArr.reduce(
+                (previousCurr, currentCurr) => previousCurr + currentCurr,
+                currentTotal
+            );
+            portValue.textContent = sumCurrent.toFixed(2)
+            console.log(sumCurrent)
+        }
+    }
+    for(let x = 0; x < tdSnap.length; x++){
+        if (tdSnap[x].className === "count-sv") {
+            snapArr.push(parseFloat(tds[x].innerText))
+            const sumSnap = snapArr.reduce(
+                (previousSnap, currentSnap) => previousSnap + currentSnap,
+                snapTotal
+            );
+            snapValue.textContent = sumSnap.toFixed(2)
+            console.log(sumSnap)
+        }
+    }
+    percentPL.textContent = parseFloat(((portValue.textContent / snapValue.textContent) * 100) - 100).toFixed(2);
+})
 
 /* Sums the total of each snapshot value cell */
-function snapSum(){
-    snapValue.textContent = document.getElementById("ethereum").cells[6].innerText;
-}
+
 
 /* Calculates the percentage profit/loss between current and snapshot value */
 function percentPort(port, snap, percent){
-       percent.textContent = Math.floor(((port.textContent / snap.textContent) * 100) - 100).toFixed(2);
+    percent.textContent = Math.floor(((port.textContent / snap.textContent) * 100) - 100).toFixed(2);
     
 }
 
-
-
-refreshBtn.addEventListener("click", function () {
-    addSum(ethereum)
-    snapSum()
-})
-
-
-
 /* Button functions that insert a row via the Crypto Class */
+
 eth.addEventListener("click", function () {
     insRow(ethereum, count, sum);
     count += 1;
@@ -288,217 +297,136 @@ eth.addEventListener("click", function () {
 
 doge.addEventListener("click", function () {
     insRow(dogecoin, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 btc.addEventListener("click", function () {
-    insRow(bitcoin, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
+    insRow(bitcoin, count, sum);
     count += 1;
 })
 
 atom.addEventListener("click", function () {
     insRow(cosmos, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 link.addEventListener("click", function () {
     insRow(chainLink, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 eos.addEventListener("click", function () {
     insRow(eosCoin, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 kus.addEventListener("click", function () {
     insRow(kusamaCoin, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 dot.addEventListener("click", function () {
     insRow(polkadot, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 matic.addEventListener("click", function () {
     insRow(polygon, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 btcCash.addEventListener("click", function () {
     insRow(bitcoinCash, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 tUSD.addEventListener("click", function () {
     insRow(trueUSD, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 pxu.addEventListener("click", function () {
     insRow(paxUS, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 pxg.addEventListener("click", function () {
     insRow(paxGold, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 usdc.addEventListener("click", function () {
     insRow(stableDollar, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 terra.addEventListener("click", function () {
     insRow(terraLuna, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 avax.addEventListener("click", function () {
     insRow(avalanche, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 ada.addEventListener("click", function () {
     insRow(cardano, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 sol.addEventListener("click", function () {
     insRow(solana, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 bnb.addEventListener("click", function () {
     insRow(binanceBNB, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 dai.addEventListener("click", function () {
     insRow(daiMulti, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 tron.addEventListener("click", function () {
     insRow(tronTron, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 ust.addEventListener("click", function () {
     insRow(tetherUSD, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 xrp.addEventListener("click", function () {
     insRow(rippleLabs, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 xlm.addEventListener("click", function () {
     insRow(stellarLumens, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 axie.addEventListener("click", function () {
     insRow(axieFinity, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 ftm.addEventListener("click", function () {
     insRow(fantom, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 nexo.addEventListener("click", function () {
     insRow(nexoNexo, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 
 ltc.addEventListener("click", function () {
     insRow(litecoin, count);
-    addSum(sum, count)
-    snapSum(add, count)
-
     count += 1;
 })
 

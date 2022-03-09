@@ -33,7 +33,7 @@ const portValue = document.querySelector("#port-val")
 const snapValue = document.querySelector("#snap-val")
 const percentPL = document.querySelector("#gain-loss")
 const refreshBtn = document.querySelector("#refresh")
-
+const recPic = document.querySelector("#pic-rec");
 /* Date Object that finds the current date of the snapshot and creates two UNIX timestamps to pass into coingecko api */
 let date = new Date();
 let year = date.getFullYear();
@@ -90,7 +90,7 @@ class Crypto {
         return parseFloat(this.currentValue() / this.snapshotValue()).toFixed(2) + "%"
     }
     /* Edit button created */
-   
+
 }
 
 /* Declare Crypto Coin classes */
@@ -139,7 +139,7 @@ function insRow(name, count) {
 
     /* rowInsert inserts a new row based on the count */
     let rowInsert = row.insertRow();
-    
+
     rowInsert.id = name.name;
     console.log(rowInsert.id)
     rowInsert.classList.add("row-insert")
@@ -168,7 +168,7 @@ function insRow(name, count) {
     cell10.setAttribute("type", "button")
     cell10.setAttribute("style", "background-image: linear-gradient(to bottom right,rgb(255, 205, 136),rgb(107, 29, 107))")
     cell10.classList.add("delete-btn")
-    
+
     /* Gets the current price of the crypto every 10 seconds*/
     async function fetchCP(crypto, currentPrice, updateCV, amnt) {
         setInterval(async function () {
@@ -222,8 +222,13 @@ function insRow(name, count) {
                 cell5.textContent = name.currentValue(cell5, cell4, cell2);
                 cell6.textContent = name.snapshotValue(cell6, cell4, cell3);
                 console.log(cell6.textContent)
-                cell7.textContent = parseFloat(((cell5.textContent / cell6.textContent)* 100) - 100).toFixed(2) + "%";
-    }
+                cell7.textContent = parseFloat(((cell5.textContent / cell6.textContent) * 100) - 100).toFixed(2);
+                if (cell7.textContent > 0) {
+                    cell7.setAttribute("style", "color: green;")
+                } else {
+                    cell7.setAttribute("style", "color: red")
+                }
+            }
         })
     })
 
@@ -243,50 +248,81 @@ function insRow(name, count) {
     cell8.textContent = name.createTypeEl(cell8);
     cell9.textContent = "Edit"
     cell10.textContent = "Delete";
+
 }
+
+/* Change color of portfolio current and snapshot value based on which is higher */
+function comparePortSnap() {
+    if (portValue.textContent > snapValue.textContent) {
+        portValue.setAttribute("style", "color: green;")
+        snapValue.setAttribute("style", "color: red;")
+    } else if (portValue.textContent < snapValue.textContent) {
+        portValue.setAttribute("style", "color: red;")
+        snapValue.setAttribute("style", "color: green;")
+    }
+}
+
 
 /* Sums the total of each current value cell, snapshot value cell, and p/l % */
 
-refreshBtn.addEventListener("click", function(){
-    let currentTotal = 0;
-    let snapTotal = 0;
-    let currentArr = [];
-    let snapArr = [];
-    let tds = document.getElementById("token-row").getElementsByTagName("td")
-    let tdSnap = document.getElementById("token-row").getElementsByTagName("td")
-    for(let i = 0; i < tds.length; i++){
-        if(tds[i].className === "count-cv"){
-            currentArr.push(parseFloat(tds[i].innerText))
-            const sumCurrent = currentArr.reduce(
-                (previousCurr, currentCurr) => previousCurr + currentCurr,
-                currentTotal
-            );
-            portValue.textContent = sumCurrent.toFixed(2)
-            console.log(sumCurrent)
+
+function refresh() {
+    setInterval(() => {
+        let currentTotal = 0;
+        let snapTotal = 0;
+        let currentArr = [];
+        let snapArr = [];
+        let tds = document.getElementById("token-row").getElementsByTagName("td")
+        let tdSnap = document.getElementById("token-row").getElementsByTagName("td")
+        for (let i = 0; i < tds.length; i++) {
+            if (tds[i].className === "count-cv") {
+                currentArr.push(parseFloat(tds[i].innerText))
+                const sumCurrent = currentArr.reduce(
+                    (previousCurr, currentCurr) => previousCurr + currentCurr,
+                    currentTotal
+                );
+                portValue.textContent = sumCurrent.toFixed(2)
+                console.log(sumCurrent)
+            }
         }
-    }
-    for(let x = 0; x < tdSnap.length; x++){
-        if (tdSnap[x].className === "count-sv") {
-            snapArr.push(parseFloat(tds[x].innerText))
-            const sumSnap = snapArr.reduce(
-                (previousSnap, currentSnap) => previousSnap + currentSnap,
-                snapTotal
-            );
-            snapValue.textContent = sumSnap.toFixed(2)
-            console.log(sumSnap)
+        for (let x = 0; x < tdSnap.length; x++) {
+            if (tdSnap[x].className === "count-sv") {
+                snapArr.push(parseFloat(tds[x].innerText))
+                const sumSnap = snapArr.reduce(
+                    (previousSnap, currentSnap) => previousSnap + currentSnap,
+                    snapTotal
+                );
+                snapValue.textContent = sumSnap.toFixed(2)
+                console.log(sumSnap)
+            }
         }
-    }
-    percentPL.textContent = parseFloat(((portValue.textContent / snapValue.textContent) * 100) - 100).toFixed(2);
-})
-
-/* Sums the total of each snapshot value cell */
-
-
-/* Calculates the percentage profit/loss between current and snapshot value */
-function percentPort(port, snap, percent){
-    percent.textContent = Math.floor(((port.textContent / snap.textContent) * 100) - 100).toFixed(2);
-    
+        comparePortSnap()
+        percentPL.textContent = parseFloat(((portValue.textContent / snapValue.textContent) * 100) - 100).toFixed(2);
+        if (percentPL.textContent > 0) {
+            percentPL.setAttribute("style", "color: green;")
+        } else {
+            percentPL.setAttribute("style", "color: red;")
+        }
+        let nexoPort = document.getElementById("nexo").cells[7].innerText;
+        let per = percentPL.textContent;
+        console.log(nexoPort)
+        console.log(per)
+        if (per > parseFloat(nexoPort)) {
+            recPic.src = "nexo-nexo-logo.png"
+            recPic.setAttribute("style", "height: 200px;")
+            console.log("hi")
+        } else if (per < parseFloat(nexoPort)) {
+            recPic.src = "bitcoin-btc-logo.png"
+            recPic.setAttribute("style", "height: 200px;")
+        }
+    }, 5000);
 }
+
+refresh()
+
+
+
+
 
 /* Button functions that insert a row via the Crypto Class */
 
@@ -429,5 +465,3 @@ ltc.addEventListener("click", function () {
     insRow(litecoin, count);
     count += 1;
 })
-
-percentPort(portValue, snapValue, percentPL)

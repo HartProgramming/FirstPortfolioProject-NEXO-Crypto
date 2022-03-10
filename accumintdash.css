@@ -40,23 +40,31 @@ body {
 }
 
 .row-insert {
-    background-image: linear-gradient(to bottom right, #5ce1e6, #38b6ff, #5271ff);
-    font-weight: 700;
-    font-family: sans-serif;
-    color: rgb(77, 73, 73);
+  background-image: linear-gradient(to bottom right, #5ce1e6, #38b6ff, #5271ff);
+  font-weight: 700;
+  font-family: sans-serif;
+  color: rgb(77, 73, 73);
 }
 
 .select-coins {
   margin-top: 15px;
-  width: 100%;
+  width: 94%;
   height: cover;
   padding: 30px;
   margin: auto;
   display: flex;
+  border-width: 17px;
+  border-radius: 40px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   background-image: linear-gradient(to bottom right, #5ce1e6, #38b6ff, #5271ff);
+}
+
+.select-coins-back{
+    background-color: black;
+    width: 100%;
+    height: cover;
 }
 
 .edit-btn {
@@ -64,7 +72,7 @@ body {
   width: 126%;
   margin: 0;
   display: flex;
-    justify-content: center;
+  justify-content: center;
 }
 
 .delete-btn {

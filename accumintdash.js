@@ -34,6 +34,7 @@ const snapValue = document.querySelector("#snap-val")
 const percentPL = document.querySelector("#gain-loss")
 const refreshBtn = document.querySelector("#refresh")
 const recPic = document.querySelector("#pic-rec");
+const loyalty = document.querySelector("#loyalty");
 /* Date Object that finds the current date of the snapshot and creates two UNIX timestamps to pass into coingecko api */
 let date = new Date();
 let year = date.getFullYear();
@@ -304,6 +305,7 @@ function refresh() {
             percentPL.setAttribute("style", "color: red;")
         }
         let nexoPort = document.getElementById("nexo").cells[7].innerText;
+        let nexoCurr = document.getElementById("nexo").cells[6].innerText;
         let per = percentPL.textContent;
         console.log(nexoPort)
         console.log(per)
@@ -314,6 +316,11 @@ function refresh() {
         } else if (per < parseFloat(nexoPort)) {
             recPic.src = "bitcoin-btc-logo.png"
             recPic.setAttribute("style", "height: 200px;")
+        }
+        let loyalLevel = parseFloat(nexoCurr/portValue.textContent).toFixed(3)
+        console.log(loyalLevel)
+        if(loyalLevel > .1){
+            loyalty.textContent = "Platinum"
         }
     }, 5000);
 }

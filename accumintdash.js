@@ -306,16 +306,21 @@ function refresh() {
         }
         let nexoPort = document.getElementById("nexo").cells[7].innerText;
         let nexoCurr = document.getElementById("nexo").cells[6].innerText;
-        let per = percentPL.textContent;
+        let per = parseFloat(percentPL.textContent);
         console.log(nexoPort)
         console.log(per)
-        if (per > parseFloat(nexoPort)) {
-            recPic.src = "nexo-nexo-logo.png"
-            recPic.setAttribute("style", "height: 200px;")
-            console.log("hi")
-        } else if (per < parseFloat(nexoPort)) {
+        if (per < parseFloat(nexoPort)) {
             recPic.src = "bitcoin-btc-logo.png"
-            recPic.setAttribute("style", "height: 200px;")
+            recPic.setAttribute("style", "display: flex;")
+            recPic.setAttribute("style", "justify-content: center;")
+            console.log("hi")
+        } else if (per > parseFloat(nexoPort)) {
+
+            recPic.src = "nexo-nexo-logo.png"
+            recPic.setAttribute("style", "height: 100px;")
+            recPic.setAttribute("style", "width: 100px;")
+            recPic.setAttribute("style", "display: flex;")
+            recPic.setAttribute("style", "justify-content: center;")
         }
         let loyalLevel = parseFloat(nexoCurr/portValue.textContent).toFixed(3)
         console.log(loyalLevel)

@@ -35,6 +35,8 @@ const percentPL = document.querySelector("#gain-loss")
 const refreshBtn = document.querySelector("#refresh")
 const recPic = document.querySelector("#pic-rec");
 const loyalty = document.querySelector("#loyalty");
+const tick = document.querySelector("#first-tick")
+
 /* Date Object that finds the current date of the snapshot and creates two UNIX timestamps to pass into coingecko api */
 let date = new Date();
 let year = date.getFullYear();
@@ -60,9 +62,10 @@ let portArr = []
 
 /* CRYPTO CLASS - This allows for each crypto button to inherit the CRYPTO object attributes - image, name, edit & delete button, amt of crypto input, current & snaphshot value functions, p/l % function */
 class Crypto {
-    constructor(pic, name) {
+    constructor(pic, name, abb) {
         this.pic = pic;
         this.name = name;
+        this.abb = abb;
     }
 
     /* Function for amount of crypto owned - allows for edit */
@@ -96,34 +99,40 @@ class Crypto {
 
 /* Declare Crypto Coin classes */
 
-const bitcoin = new Crypto("bitcoin-btc-logo.png", "bitcoin")
-const ethereum = new Crypto("ethereum-eth-logo.png", "ethereum")
-const cardano = new Crypto("cardano-ada-logo.png", "cardano")
-const solana = new Crypto("solana-sol-logo.png", "solana")
-const cosmos = new Crypto("cosmos-atom-logo.png", "cosmos")
-const polkadot = new Crypto("polkadot-new-dot-logo.png", "polkadot")
-const polygon = new Crypto("polygon-matic-logo.png", "matic-network")
-const avalanche = new Crypto("avalanche-avax-logo.png", "avalanche-2")
-const paxGold = new Crypto("pax-gold-paxg-logo.png", "pax-gold")
-const paxUS = new Crypto("paxos-standard-usdp-logo.png", "paxos-standard")
-const tronTron = new Crypto("tron-trx-logo.png", "tron")
-const nexoNexo = new Crypto("nexo-nexo-logo.png", "nexo")
-const chainLink = new Crypto("chainlink-link-logo.png", "chainlink")
-const terraLuna = new Crypto("terra-luna-luna-logo.png", "terra-luna")
-const dogecoin = new Crypto("dogecoin-doge-logo.png", "dogecoin")
-const fantom = new Crypto("fantom-ftm-logo.png", "fantom")
-const stableDollar = new Crypto("usd-coin-usdc-logo.png", "usd-coin")
-const bitcoinCash = new Crypto("bitcoin-cash-bch-logo.png", "bitcoin-cash")
-const trueUSD = new Crypto("trueusd-tusd-logo.png", "true-usd")
-const axieFinity = new Crypto("axie-infinity-axs-logo.png", "axie-infinity")
-const stellarLumens = new Crypto("stellar-xlm-logo.png", "stellar")
-const daiMulti = new Crypto("multi-collateral-dai-dai-logo.png", "dai")
-const tetherUSD = new Crypto("tether-usdt-logo.png", "tether")
-const litecoin = new Crypto("litecoin-ltc-logo.png", "litecoin")
-const rippleLabs = new Crypto("xrp-xrp-logo.png", "ripple")
-const binanceBNB = new Crypto("bnb-bnb-logo.png", "binancecoin")
-const eosCoin = new Crypto("eos-eos-logo.png", "eos")
-const kusamaCoin = new Crypto("kusama-logo.png", "kusama")
+const bitcoin = new Crypto("bitcoin-btc-logo.png", "bitcoin", "btc")
+const ethereum = new Crypto("ethereum-eth-logo.png", "ethereum", "eth")
+const cardano = new Crypto("cardano-ada-logo.png", "cardano", "ada")
+const solana = new Crypto("solana-sol-logo.png", "solana", "sol")
+const cosmos = new Crypto("cosmos-atom-logo.png", "cosmos", "atom")
+const polkadot = new Crypto("polkadot-new-dot-logo.png", "polkadot", "dot")
+const polygon = new Crypto("polygon-matic-logo.png", "matic-network", "matic")
+const avalanche = new Crypto("avalanche-avax-logo.png", "avalanche-2", "avax")
+const paxGold = new Crypto("pax-gold-paxg-logo.png", "pax-gold", "paxg")
+const paxUS = new Crypto("paxos-standard-usdp-logo.png", "paxos-standard", "paxus")
+const tronTron = new Crypto("tron-trx-logo.png", "tron", "tron")
+const nexoNexo = new Crypto("nexo-nexo-logo.png", "nexo", "nexo")
+const chainLink = new Crypto("chainlink-link-logo.png", "chainlink", "link")
+const terraLuna = new Crypto("terra-luna-luna-logo.png", "terra-luna", "terra")
+const dogecoin = new Crypto("dogecoin-doge-logo.png", "dogecoin", "doge")
+const fantom = new Crypto("fantom-ftm-logo.png", "fantom", "ftm")
+const stableDollar = new Crypto("usd-coin-usdc-logo.png", "usd-coin", "usdc")
+const bitcoinCash = new Crypto("bitcoin-cash-bch-logo.png", "bitcoin-cash", "btccash")
+const trueUSD = new Crypto("trueusd-tusd-logo.png", "true-usd", "tusd")
+const axieFinity = new Crypto("axie-infinity-axs-logo.png", "axie-infinity", "axs")
+const stellarLumens = new Crypto("stellar-xlm-logo.png", "stellar", "xlm")
+const daiMulti = new Crypto("multi-collateral-dai-dai-logo.png", "dai", "dai")
+const tetherUSD = new Crypto("tether-usdt-logo.png", "tether", "ustd")
+const litecoin = new Crypto("litecoin-ltc-logo.png", "litecoin", "ltc")
+const rippleLabs = new Crypto("xrp-xrp-logo.png", "ripple", "xrp")
+const binanceBNB = new Crypto("bnb-bnb-logo.png", "binancecoin", "bnb")
+const eosCoin = new Crypto("eos-eos-logo.png", "eos", "eos")
+const kusamaCoin = new Crypto("kusama-logo.png", "kusama", "kus")
+
+/* Ticker function */
+const cryptoArr = [bitcoin.abb, ethereum.abb, cardano.abb, solana.abb, cosmos.abb, polkadot.abb, avalanche.abb, chainLink.abb, nexo.abb, dogecoin.abb, terraLuna.abb];
+const cryptoP = document.createElement("p");
+
+
 
 /* Declare count variable to use to count number of rows and create an array */
 let count = 0;
@@ -322,9 +331,9 @@ function refresh() {
             recPic.setAttribute("style", "display: flex;")
             recPic.setAttribute("style", "justify-content: center;")
         }
-        let loyalLevel = parseFloat(nexoCurr/portValue.textContent).toFixed(3)
+        let loyalLevel = parseFloat(nexoCurr / portValue.textContent).toFixed(3)
         console.log(loyalLevel)
-        if(loyalLevel > .1){
+        if (loyalLevel > .1) {
             loyalty.textContent = "Platinum"
         }
     }, 5000);

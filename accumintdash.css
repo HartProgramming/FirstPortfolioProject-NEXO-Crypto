@@ -3,6 +3,31 @@ body {
   font-family: Questrial;
 }
 
+.nav-link {
+  font-size: 24px;
+
+  background: -webkit-linear-gradient(right, #5ce1e6, #38b6ff, #5271ff);
+    letter-spacing: 1.12px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#nav-right {
+  margin-right: 10%;
+  position: relative;
+}
+
+
+
+.brand {
+  font-size: 34px;
+  background: -webkit-linear-gradient(right,rgb(177, 196, 179),rgb(126, 135, 143));
+  letter-spacing: 1.3px;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
 .navbar-custom {
   background-image: linear-gradient(
     to bottom right,
@@ -12,6 +37,11 @@ body {
   color: white;
 }
 
+.custom-border {
+  border-bottom: 15px solid rgb(81, 3, 133);
+  border-width: 2px;
+}
+
 .right {
   margin-left: 40%;
 }
@@ -19,6 +49,24 @@ body {
 .navbar-dark .navbar-custom {
   color: white;
 }
+
+.ticker{
+    border-bottom: 3px solid black;
+    height: 60px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#tick-2{
+  border-left: 5px solid black;
+  width: 33%;
+  height: 60px;
+  border-right: 5px solid black;
+}
+
 
 #purpose {
   height: cover;
@@ -58,6 +106,7 @@ body {
   border-radius: 40px;
   flex-direction: row;
   flex-wrap: wrap;
+  border: 7px solid black;
   justify-content: space-evenly;
   background-image: linear-gradient(to bottom right, #5ce1e6, #38b6ff, #5271ff);
 }
@@ -119,9 +168,9 @@ img:focus {
   transform: translateY(-0.05em);
 }
 
-#cell8{
-    border: 3px solid black;
-    border-right: none;
+#cell8 {
+  border: 3px solid black;
+  border-right: none;
 }
 
 #cell9 {
@@ -133,8 +182,8 @@ img:focus {
   border-left: none;
 }
 
-.bor tr th{
-    border: 3px solid black;
+.bor tr th {
+  border: 3px solid black;
 }
 
 .dashboard-header {
@@ -174,7 +223,11 @@ img:focus {
 }
 
 .bor {
-  background-image: linear-gradient(to right, rgb(43, 132, 173), rgb(40, 10, 172));
+  background-image: linear-gradient(
+    to right,
+    rgb(43, 132, 173),
+    rgb(40, 10, 172)
+  );
   border: 1px solid white;
   color: white;
   border-bottom: 3px solid black;
@@ -203,9 +256,11 @@ img:focus {
   height: cover;
   margin: 0;
   display: flex;
-  border-bottom: 5px solid white;
+  border-bottom: 7.2px solid rgb(184, 184, 184);
   color: white;
   position: relative;
+  border-width: 4.2px;
+  border-top: 7.2px solid rgb(184, 184, 184);
 }
 
 .rec {
@@ -214,10 +269,11 @@ img:focus {
   height: cover;
   background-image: linear-gradient(
     to bottom right,
-    rgb(25, 196, 39),
-    rgb(8, 129, 243)
+    rgb(100, 100, 100),
+    rgb(172, 172, 172)
   );
   margin: 0;
+  border-right: 4.2px solid rgb(187, 187, 187);
   font-size: 50px;
   display: flex;
   justify-content: space-evenly;
@@ -225,25 +281,27 @@ img:focus {
   flex-direction: row;
   align-items: center;
   position: relative;
-  margin-bottom: -7px;
   flex-wrap: wrap;
 }
 
 .loyal {
   background-image: linear-gradient(
-    to right,
-    rgb(25, 196, 39),
-    rgb(8, 129, 243)
+    to bottom right,
+    rgb(100, 100, 100),
+    rgb(172, 172, 172)
   );
   letter-spacing: 1.4px;
-  font-size: 50px;
+  font-size: 30px;
   color: white;
   width: 100%;
-  margin-bottom: -7px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   position: relative;
   flex-wrap: wrap;
+}
+
+.loyal p {
+  margin-top: 12px;
 }

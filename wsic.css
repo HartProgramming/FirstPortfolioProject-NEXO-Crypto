@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: Questrial;
   font-weight: 400;
+  width: 100%;
   background-color: rgb(240, 238, 238);
 }
 
@@ -17,15 +18,11 @@ body {
 }
 
 .navbar-custom {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(25, 25, 196),
-    rgb(107, 29, 107)
-  );
+  background-color: white;
 }
 
 .navbar-custom .nav-text-custom {
-  color: white;
+  color: blue;
 }
 
 header {
@@ -70,9 +67,7 @@ header {
 #purpose {
   background-color: rgb(240, 238, 238);
   height: 100vh;
-  width: 90%;
-  left: 50%;
-  margin-left: 5%;
+  width: 100%;
 }
 
 .purpose-head {
@@ -83,12 +78,79 @@ header {
 }
 
 .dashboard-div {
-  display: inline-block;
-  height: 450px;
-  width: 40%;
-  margin-left: 30px;
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  width: 45%;
+  margin-top: 100px;
   position: relative;
-  margin-top: 80px;
+background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
+  color: white;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+  .dashboard-div-inner{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 40px;
+  flex-direction: column;
+  height: 400px;
+  width: 90%;
+  border: 3px solid white;
+  position: relative;
+  margin-top: 20px;
+    padding: 30px;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );}
+
+.dashboard-bullets{
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid white;
+  justify-content: center;
+padding-top: 10px;
+}
+
+.dashboard-bullets h3{
+  font-size: 31px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.dashboard-div-2 {
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  width: 45%;
+  margin-top: 100px;
+  position: relative;
+background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
+  margin-left: 5px;
+  color: white;
+  font-size: 20px;
+}
+
+#dashboard-signup{
+  border-radius: 5px;
+  background: -webkit-linear-gradient(right, #5ce1e6, #38b6ff, #5271ff);
+    letter-spacing: 1.12px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: white;
+
 }
 
 .dashboard {
@@ -139,7 +201,6 @@ header {
   color: white;
   height: cover;
   width: 100%;
-  margin-top: 350px;
 }
 
 .accumint-head{

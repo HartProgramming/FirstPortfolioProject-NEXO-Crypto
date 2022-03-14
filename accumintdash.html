@@ -50,12 +50,8 @@
     </div>
 </nav>
 <body>
-    <div class="ticker">
-        <div id="tick-1">
-            <p>BTC $<span>40000</span></p>
-        </div>
-        <div id="tick-2"></div>
-        <div id="tick-3"></div>
+    <div id="tick" class="ticker">
+        <p class="ticker-left">Crypto Prices</p>
     </div>
     
     <header class="header d-flex justify-content-center">
@@ -109,7 +105,7 @@
         <tr>
             <th scope="col"><img height=43px src="logo.png"></th>
             <th scope="col">Token</th>
-            <th scope="col">Price</th>
+            <th scope="col">Updated Price</th>
             <th scope="col">Snapshot</th>
             <th scope="col">Amount</th>
             <th scope="col">Current Value</th>
@@ -143,6 +139,16 @@
     </tbody>
 </table>
 </div>
+<section>
+    <div>
+        <h3>Twitter Headlines</h3>
+        <div>
+            <article id="twitter-article"></article>
+        </div>
+    </div>
+
+    <div>Crypto News</div>
+</section>
 
 <script src="accumintdash.js"></script>
 </body>

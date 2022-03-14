@@ -29,40 +29,38 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-custom navbar-expand-lg">
-        <div class="container-fluid">
-            <img height=80px src="logo.png" alt="logo">
-            <span class="company">ACCUMINT</span>
+    <nav class="navbar navbar-custom custom-border navbar-expand-lg">
+        <div class="container-fluid d-flex justify-content-end">
+            <a class="navbar-brand brand" href="#">ACCUMINT</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon navbar-custom"></span>
             </button>
-            <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div id="nav-right" class="collapse ms-2 justify-content-end navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link nav-text-custom active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item nav-text-custom">
-                        <a class="nav-link nav-text-custom" href="#purpose">Purpose</a>
+                        <a class="nav-link active" aria-current="page" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-text-custom" href="#accumint">Accumint</a>
+                        <a class="nav-link" href="#purpose">ACCUMINT</a>
+                    </li>
+    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#accumint">Method</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-text-custom" href="#">About</a>
+                        <a class="nav-link" href="#login">Login</a>
                     </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-text-custom" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-text-custom" href="#">Sign Up</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#signup">Sign Up</a>
+                    </li>
                 </ul>
+    
             </div>
         </div>
     </nav>
 
-    <header class="d-flex justify-content-center align-items-center">
+    <header id="home" class="d-flex justify-content-center align-items-center">
         <div class="header-div d-flex justify-content-center align-items-center">
             <h1>
                 <span class="header-company-name d-flex justify-content-center">Accumulate Interest</span>
@@ -70,19 +68,6 @@
             </h1>
         </div>
     </header>
-
-    <section class="" id="purpose">
-        <div class="d-flex justify-content-center">
-            <h2 class="purpose-head">Purpose</h2>
-        </div>
-        <div class="purpose-div row d-flex justify-content-center">
-        <div class=" d-flex justify-content-center">
-            <div class="col-sm-12 dashboard-div">
-            <h3 class="dashboard ">Dashboard</h3>
-            <p class="dashboard-text ">Our Dashboard provides Nexo users a visual of their portfolio performance on a dollar and percentage basis</p>
-            </div>
-        </div>
-        </div>
         
     </section>
     <section id="accumint">
@@ -94,23 +79,48 @@
             <img id="wheelLogo" src="logo.png" alt="wheel part of accumint logo">
         </div>
         <div id="accumint-paragraph" class="col col-8 d-flex ">
-            <p class="accumint-para">We compare your crypto portfolio performance, including NEXO, from the time of the NEXO snapshot to current prices. If NEXO token outperformed your portfolio we will trigger a reccomendation to accept your daily interest in crypto. If your portfolio outperformed NEXO then we trigger a reccomendation to take NEXO.</p>
+            <p class="accumint-para">We compare your crypto portfolio performance, including NEXO, from the time of the NEXO snapshot to current prices. If NEXO token outperformed your portfolio we will trigger a reccomendation to accept your daily interest in crypto. If your portfolio outperformed NEXO then we trigger a reccomendation to take NEXO. By doing this you will be accepting interest in an optimal way that earns you more crypto at higher interest rates while maintaining your current loyalty level with NEXO.</p>
         </div>
         </div>
-    </section>
-    <section class="" id="about">
-        <div class="d-flex justify-content-center">
-            <h2 class="purpose-head">About</h2>
-        </div>
-        <div class="purpose-div row d-flex justify-content-center">
-            <div class=" d-flex justify-content-center">                    
-                    <p class="dashboard-text ">Our Dashboard provides Nexo users a visual of their portfolio performance on
-                        a dollar and percentage basis</p>
-                
+   </section>
+        <section class="" id="purpose">
+            <div class="d-flex justify-content-center">
+                <h2 class="purpose-head">ACCUMINT</h2>
             </div>
-        </div>
-    
-    </section>
+            <div class="d-flex justify-content-center row">
+                <div class="dashboard-div">
+                    <div class="dashboard-div-inner">
+                        <div class="dashboard-bullets">
+                            <h3>Features</h3>
+                        </div>
+                        <div class="dashboard-bullets">
+                            <p>Visual Dashboard</p>
+                        </div>
+                        <div class="dashboard-bullets">
+                            <p>Track Performance</p>
+                        </div>
+                        <div class="dashboard-bullets">
+                            <p>Interest Reccomendation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-div-2">
+                    <div class="dashboard-div-inner">
+                        <div class="dashboard-bullets">
+                            <h3>Try For Free</h3>
+                        </div>
+                        <div class="dashboard-bullets">
+                            <p>Free 30 Day Trial</p>
+                        </div>
+                        <div class="dashboard-bullets">
+                            <p>$3.99/yr After</p>
+                        </div>
+                        <div class="dashboard-bullets">
+                            <p id="dashboard-signup">Sign Up</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

@@ -52,21 +52,36 @@ body {
 
 .ticker{
     border-bottom: 3px solid black;
-    height: 60px;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+  width: 100%;
+  height: cover;
+  overflow: hidden;
+  white-space: nowrap;
+    }
+
+.ticker-left{
+    background: -webkit-linear-gradient(right, #5ce1e6, #38b6ff, #5271ff);
+    letter-spacing: 1.12px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
+  width: 400px;
+  height: cover;
+  animation: to-left 30s ease-in;
+  text-transform: uppercase;
+  display: inline-block;
+  flex-wrap: wrap;
+  animation-iteration-count: infinite;
 }
 
-#tick-2{
-  border-left: 5px solid black;
-  width: 33%;
-  height: 60px;
-  border-right: 5px solid black;
+@keyframes to-left {
+  0%{
+    transform: translateX(800px);
+  }
+  100%{
+    transform: translateX(-4700px);
+  }
+  
 }
-
 
 #purpose {
   height: cover;

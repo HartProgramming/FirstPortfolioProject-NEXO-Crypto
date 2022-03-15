@@ -6,8 +6,9 @@ body {
 .nav-link {
   font-size: 24px;
 
-  background: -webkit-linear-gradient(right, #5ce1e6, #38b6ff, #5271ff);
-    letter-spacing: 1.12px;
+  background: -webkit-linear-gradient(right, rgb(25, 25, 196),
+    rgb(107, 29, 107));
+  letter-spacing: 1.12px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -17,11 +18,13 @@ body {
   position: relative;
 }
 
-
-
 .brand {
   font-size: 34px;
-  background: -webkit-linear-gradient(right,rgb(177, 196, 179),rgb(126, 135, 143));
+  background: -webkit-linear-gradient(
+    right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
   letter-spacing: 1.3px;
   -webkit-background-clip: text;
 
@@ -29,11 +32,7 @@ body {
 }
 
 .navbar-custom {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(25, 25, 196),
-    rgb(107, 29, 107)
-  );
+  background-color: white;
   color: white;
 }
 
@@ -46,23 +45,32 @@ body {
   margin-left: 40%;
 }
 
-.navbar-dark .navbar-custom {
-  color: white;
+.navbar-toggler {
+  margin-left: 25px;
 }
 
-.ticker{
-    border-bottom: 3px solid black;
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+  border-color: black;
+}
+
+.ticker {
+  border-bottom: 3px solid black;
   width: 100%;
   height: cover;
   overflow: hidden;
+  background-image: linear-gradient(to bottom right, rgb(25, 25, 196),
+    rgb(107, 29, 107));
   white-space: nowrap;
-    }
+}
 
-.ticker-left{
-    background: -webkit-linear-gradient(right, #5ce1e6, #38b6ff, #5271ff);
-    letter-spacing: 1.12px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.ticker-left {
+  color: white;
+  letter-spacing: 1.12px;
+  
   font-size: 30px;
   width: 300px;
   height: cover;
@@ -74,13 +82,12 @@ body {
 }
 
 @keyframes to-left {
-  0%{
-    transform: translateX(800px);
+  0% {
+    transform: translateX(1500px);
   }
-  100%{
+  100% {
     transform: translateX(-4700px);
   }
-  
 }
 
 #purpose {
@@ -100,6 +107,49 @@ body {
   font-size: 4em;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.rec {
+  letter-spacing: 1.4px;
+  width: 100%;
+  height: cover;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
+  margin: 0;
+  border-right: 4.2px solid black;
+  font-size: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.loyal {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(25, 25, 196),
+    rgb(107, 29, 107)
+  );
+  letter-spacing: 1.4px;
+  font-size: 30px;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.loyal p {
+  margin-top: 12px;
 }
 
 .row-insert {
@@ -137,6 +187,16 @@ body {
     rgb(107, 29, 107)
   );
   padding-top: 25px;
+}
+
+.logo {
+  border-radius: 50%;
+  height: 50px;
+  border: 1.3px solid black;
+}
+
+.logo-trans {
+  height: 50px;
 }
 
 .edit-btn {
@@ -240,8 +300,8 @@ img:focus {
 .bor {
   background-image: linear-gradient(
     to right,
-    rgb(43, 132, 173),
-    rgb(40, 10, 172)
+    rgb(91, 144, 168),
+    rgb(84, 65, 172)
   );
   border: 1px solid white;
   color: white;
@@ -271,52 +331,9 @@ img:focus {
   height: cover;
   margin: 0;
   display: flex;
-  border-bottom: 7.2px solid rgb(184, 184, 184);
+  border-bottom: 4.2px solid black;
   color: white;
   position: relative;
-  border-width: 4.2px;
-  border-top: 7.2px solid rgb(184, 184, 184);
-}
-
-.rec {
-  letter-spacing: 1.4px;
-  width: 100%;
-  height: cover;
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(100, 100, 100),
-    rgb(172, 172, 172)
-  );
-  margin: 0;
-  border-right: 4.2px solid rgb(187, 187, 187);
-  font-size: 50px;
-  display: flex;
-  justify-content: space-evenly;
-  color: white;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-  flex-wrap: wrap;
-}
-
-.loyal {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(100, 100, 100),
-    rgb(172, 172, 172)
-  );
-  letter-spacing: 1.4px;
-  font-size: 30px;
-  color: white;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  position: relative;
-  flex-wrap: wrap;
-}
-
-.loyal p {
-  margin-top: 12px;
+  border-width: 2.2px;
+  border-top: 7.2px solid black;
 }

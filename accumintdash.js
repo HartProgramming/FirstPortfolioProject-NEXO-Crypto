@@ -273,7 +273,7 @@ function comparePortSnap() {
 
 async function collectCurr(price, abb, tick) {
 
-    setInterval(async function(){
+    setInterval(async function () {
         const config = { headers: { Accept: "application/json" } }
         const params = {
             ids: price
@@ -282,7 +282,7 @@ async function collectCurr(price, abb, tick) {
 
         tick.textContent = `${abb}: ${res.data[price].usd.toFixed(2)}`
 
-    }, 5000);
+    }, 8000);
 };
 
 const cryptoArr = [bitcoin, ethereum, cardano, solana, cosmos, polkadot, avalanche, chainLink, nexoNexo, dogecoin, terraLuna];
@@ -363,9 +363,15 @@ function refresh() {
         let loyalLevel = parseFloat(nexoCurr / portValue.textContent).toFixed(3)
         console.log(loyalLevel)
         if (loyalLevel > .1) {
-            loyalty.textContent = "Platinum"
+            loyalty.textContent = "Platinum";
+        } else if (loyalLevel < .1 && loyalLevel > .05) {
+            loyalty.textContent = "Gold";
+        } else if (loyalLevel < .05 && loyalLevel > .01) {
+            loyalty.textContent = "Silver";
+        } else {
+            loyalty.textContent = "Base";
         }
-    }, 5000);
+    }, 15000);
 }
 
 refresh()
@@ -373,18 +379,6 @@ refresh()
 /* Twitter News */
 
 const twitterArticle = document.querySelector("#twitter-article");
-
-async function twitter(price) {
-
-    setInterval(async function () {
-        const config = { headers: { Accept: "application/json" } }
-        const params = {
-            ids: price
-        }
-        const res = await axios.get(`https://api.twitter.com/1.1/search/tweets.json?q=%23${encodeURIComponent(params.price)}&result_type=recent`, config)
-
-    }, 5000);
-};
 
 
 

@@ -17,9 +17,52 @@ body {
   font-size: 25px;
 }
 
-.navbar-custom {
-  background-color: white;
+.logo{
+  height: 50px;
 }
+
+.nav-link {
+  font-size: 24px;
+
+  background: -webkit-linear-gradient(right, rgba(3, 3, 139, 0.85),
+    rgba(59, 2, 59, 0.85));
+    letter-spacing: 1.12px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#nav-right {
+  margin-right: 10%;
+  position: relative;
+}
+
+.navbar-toggler{
+  margin-left: 25px;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler{
+  border-color: black;
+}
+
+.brand {
+  font-size: 34px;
+  background: -webkit-linear-gradient(right,rgba(3, 3, 139, 0.85),
+    rgba(59, 2, 59, 0.85));
+  letter-spacing: 1.3px;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar-custom {
+  
+  color: white;
+}
+
 
 .navbar-custom .nav-text-custom {
   color: blue;

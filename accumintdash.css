@@ -70,23 +70,28 @@ body {
 .ticker-left {
   color: white;
   letter-spacing: 1.12px;
-  
   font-size: 30px;
   width: 300px;
   height: cover;
-  animation: to-left 30s ease-in;
   text-transform: uppercase;
   display: inline-block;
   flex-wrap: wrap;
+  -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: to-left;
+  animation-name: to-left;
+  -webkit-animation-duration: 25s;
+  animation-duration: 25s;
 }
 
 @keyframes to-left {
-  0% {
-    transform: translateX(1500px);
+  0%{
+    transform: translateX(750%);
   }
   100% {
-    transform: translateX(-4700px);
+    transform: translateX(-1170%);
   }
 }
 

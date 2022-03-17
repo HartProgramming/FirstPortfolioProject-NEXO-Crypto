@@ -187,7 +187,6 @@ function insRow(name, count) {
             const res = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(params.ids)}&vs_currencies=${encodeURIComponent(params.vs_currencies)}`, config)
             currentPrice.textContent = res.data[crypto][cool].toFixed(2)
             updateCV.textContent = parseFloat(currentPrice.textContent * amnt.textContent).toFixed(2)
-
         }, 10000);
 
     }
@@ -282,7 +281,7 @@ async function collectCurr(price, abb, tick) {
 
         tick.textContent = `${abb}: ${res.data[price].usd.toFixed(2)}`
 
-    }, 8000);
+    }, 5000);
 };
 
 const cryptoArr = [bitcoin, ethereum, cardano, solana, cosmos, polkadot, avalanche, chainLink, nexoNexo, dogecoin, terraLuna];

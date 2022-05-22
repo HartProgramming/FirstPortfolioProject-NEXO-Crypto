@@ -17,7 +17,6 @@ const kus = document.querySelector("#kus");
 const xlm = document.querySelector("#xlm");
 const xrp = document.querySelector("#xrp");
 const tUSD = document.querySelector("#tusd");
-const ust = document.querySelector("#ust");
 const link = document.querySelector("#link");
 const tron = document.querySelector("#tron-tron");
 const pxg = document.querySelector("#paxgold");
@@ -75,12 +74,7 @@ class Crypto {
         return x.value = "Click Edit"
     }
     /* Function for the type of state the money is in creidt or loan*/
-    createTypeEl(y) {
-
-        y.setAttribute("contenteditable", false)
-        y.textContent = "Loan"
-        return y.value = "Loan"
-    }
+    
     /* Function for determining Current Value */
     currentValue(c, d, e) {
         return c.textContent = parseFloat(e.textContent * d.textContent).toFixed(2)
@@ -112,7 +106,6 @@ const paxUS = new Crypto("paxos-standard-usdp-logo.png", "paxos-standard", "paxu
 const tronTron = new Crypto("tron-trx-logo.png", "tron", "tron")
 const nexoNexo = new Crypto("nexo-nexo-logo.png", "nexo", "nexo")
 const chainLink = new Crypto("chainlink-link-logo.png", "chainlink", "link")
-const terraLuna = new Crypto("terra-luna-luna-logo.png", "terra-luna", "terra")
 const dogecoin = new Crypto("dogecoin-doge-logo.png", "dogecoin", "doge")
 const fantom = new Crypto("fantom-ftm-logo.png", "fantom", "ftm")
 const stableDollar = new Crypto("usd-coin-usdc-logo.png", "usd-coin", "usdc")
@@ -284,7 +277,7 @@ async function collectCurr(price, abb, tick) {
     }, 5000);
 };
 
-const cryptoArr = [bitcoin, ethereum, cardano, solana, cosmos, polkadot, avalanche, chainLink, nexoNexo, dogecoin, terraLuna];
+const cryptoArr = [bitcoin, ethereum, cardano, solana, cosmos, polkadot, avalanche, chainLink, nexoNexo, dogecoin, litecoin];
 function ticker() {
     for (let i of cryptoArr) {
         let cryptoP = document.createElement("p")
@@ -453,11 +446,6 @@ usdc.addEventListener("click", function () {
     count += 1;
 })
 
-terra.addEventListener("click", function () {
-    insRow(terraLuna, count);
-    count += 1;
-})
-
 avax.addEventListener("click", function () {
     insRow(avalanche, count);
     count += 1;
@@ -485,11 +473,6 @@ dai.addEventListener("click", function () {
 
 tron.addEventListener("click", function () {
     insRow(tronTron, count);
-    count += 1;
-})
-
-ust.addEventListener("click", function () {
-    insRow(tetherUSD, count);
     count += 1;
 })
 
